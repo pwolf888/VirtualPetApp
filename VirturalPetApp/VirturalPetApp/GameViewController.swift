@@ -14,11 +14,23 @@ class GameViewController: UIViewController {
     
     var newCreature = Monster(happiness: 8, hunger: 8)
     
+    let tenMinutesFromNow =  10
+    let twentyMinutesFromNow =  20
+    let thirtyMinutesFromNow =  30
+    let fortyMinutesFromNow =  40
+    let fiftyMinutesFromNow =  50
+    let sixtyMinutesFromNow = 0
+    
+    var currentDate = Date()
+    var userCalendar = Calendar.current
+    var useDateComponents = DateComponents()
+   
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+        let minutes = userCalendar.component(.minute, from: currentDate)
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -34,13 +46,42 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
-        let currentDateTime = Date()
-        let calendar = Calendar.current
-        let hours = calendar.component(.hour, from: currentDateTime)
-        let minutes = calendar.component(.minute, from: currentDateTime)
-        let seconds = calendar.component(.second, from: currentDateTime)
+        
     }
     
+    func timeCheck() {
+        
+        switch minutes {
+            
+            
+        case tenMinutesFromNow:
+            
+            print("I have pooed once")
+            
+        case twentyMinutesFromNow:
+            
+            print("I have pooed twice")
+            
+        case thirtyMinutesFromNow:
+            
+            print("I have pooed thrice")
+            
+        case fortyMinutesFromNow:
+            
+            print("I have pooed four times")
+            
+        case fiftyMinutesFromNow:
+            
+            print("I have pooed 5 times")
+            
+        default:
+            
+            print("I am thinking about pooing soon")
+            
+            
+        }
+
+    }
     
     
     
