@@ -23,14 +23,11 @@ class GameViewController: UIViewController {
     
     var currentDate = Date()
     var userCalendar = Calendar.current
-    var useDateComponents = DateComponents()
-   
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let minutes = userCalendar.component(.minute, from: currentDate)
+        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -47,42 +44,54 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
         
+        timeCheck()
+    }
+    
+    func timeUpdate() {
+        // 
     }
     
     func timeCheck() {
-        
-        switch minutes {
-            
+        var seconds = userCalendar.component(.second, from: currentDate)
+        switch seconds {
             
         case tenMinutesFromNow:
-            
+            unhappyHungry()
             print("I have pooed once")
             
         case twentyMinutesFromNow:
-            
+            unhappyHungry()
             print("I have pooed twice")
             
         case thirtyMinutesFromNow:
-            
+            unhappyHungry()
             print("I have pooed thrice")
             
         case fortyMinutesFromNow:
-            
+            unhappyHungry()
             print("I have pooed four times")
             
         case fiftyMinutesFromNow:
-            
+            unhappyHungry()
             print("I have pooed 5 times")
             
         default:
             
             print("I am thinking about pooing soon")
+            print(seconds)
             
             
         }
 
     }
     
+    // A function to reduce the happiness and hunger variables
+    func unhappyHungry() {
+        newCreature.happiness -= 1
+        newCreature.hunger -= 1
+        happinessMeter.text = "\(newCreature.happiness)"
+        hungerMeter.text = "\(newCreature.hunger)"
+    }
     
     
     // IBOutlets for UI labels - 8 Happiness etc
@@ -95,6 +104,8 @@ class GameViewController: UIViewController {
         if newCreature.hunger < 8 {
             newCreature.happiness += 1
             happinessMeter.text = "\(newCreature.happiness)"
+            timeCheck()
+            
         }
     }
     
@@ -105,11 +116,6 @@ class GameViewController: UIViewController {
             hungerMeter.text = "\(newCreature.hunger)"
         }
     }
-    
-    
-    
-    
-    
     
     
     
