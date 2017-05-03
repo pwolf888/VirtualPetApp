@@ -18,5 +18,5 @@ class Monster {
         self.happiness = happiness
         self.hunger = hunger
     }
-
+ 
 }
