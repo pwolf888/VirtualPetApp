@@ -11,12 +11,11 @@ import SpriteKit
 
 
 class GameViewController: UIViewController {
-
+    
+    var newCreature = Monster(happiness: 8, hunger: 8)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var newCreature = Monster(happiness: 8, hunger: 8)
-        
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -34,6 +33,37 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
     }
+    
+    // IBOutlets for UI labels - 8 Happiness etc
+    @IBOutlet weak var happinessMeter: UILabel!
+    @IBOutlet weak var hungerMeter: UILabel!
+   
+    
+    
+    @IBAction func patBtn(_ sender: UIButton) {
+        if newCreature.hunger < 8 {
+            newCreature.happiness += 1
+            happinessMeter.text = "\(newCreature.happiness)"
+        }
+    }
+    
+    
+    @IBAction func feedBtn(_ sender: UIButton) {
+        if newCreature.hunger < 8 {
+            newCreature.hunger += 1
+            hungerMeter.text = "\(newCreature.hunger)"
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     override var shouldAutorotate: Bool {
         return true
