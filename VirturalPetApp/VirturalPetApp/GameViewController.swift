@@ -12,6 +12,13 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
+    var timerSeconds = 0
+    let timerSecondsMax = 59
+    var timer = Timer()
+    var isTimerRunning = false //This will be used to make sure only one timer is created at a time.
+    
+    
+    
     var newCreature = Monster(happiness: 8, hunger: 8)
     
     let tenMinutesFromNow =  10
@@ -44,16 +51,42 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
         
-        timeCheck()
+       
+            runTimer()
+        
     }
     
     func timeUpdate() {
-        // 
+        //
+    }
+    
+    
+    func runTimer() {
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(GameViewController.updateTimer)), userInfo: nil, repeats: true)
+        isTimerRunning = true
+        
+       
+    }
+    
+    func updateTimer() {
+        if timerSeconds == 59 {
+            timerSeconds = 0
+            timerLabel.text = "\(timerSeconds)"
+        } else {
+            timerSeconds += 1
+            timerLabel.text = "\(timerSeconds)"
+        }
+        
+        if timerSeconds % 10 <= 1 {
+            timeCheck()
+        }
+        
     }
     
     func timeCheck() {
-        var seconds = userCalendar.component(.second, from: currentDate)
-        switch seconds {
+        
+        switch timerSeconds {
             
         case tenMinutesFromNow:
             unhappyHungry()
@@ -78,7 +111,7 @@ class GameViewController: UIViewController {
         default:
             
             print("I am thinking about pooing soon")
-            print(seconds)
+            
             
             
         }
@@ -97,6 +130,7 @@ class GameViewController: UIViewController {
     // IBOutlets for UI labels - 8 Happiness etc
     @IBOutlet weak var happinessMeter: UILabel!
     @IBOutlet weak var hungerMeter: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
     
     
     // Button action to pat the creature

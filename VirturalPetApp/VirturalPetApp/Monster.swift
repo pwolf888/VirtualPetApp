@@ -14,6 +14,7 @@ class Monster {
     var hunger: Int = 8
     
     
+    
     // Initialise the monsters variables
     init(happiness: Int, hunger: Int) {
         self.happiness = happiness
