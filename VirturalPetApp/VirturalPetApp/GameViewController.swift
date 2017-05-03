@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -32,14 +34,22 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+        let currentDateTime = Date()
+        let calendar = Calendar.current
+        let hours = calendar.component(.hour, from: currentDateTime)
+        let minutes = calendar.component(.minute, from: currentDateTime)
+        let seconds = calendar.component(.second, from: currentDateTime)
     }
+    
+    
+    
     
     // IBOutlets for UI labels - 8 Happiness etc
     @IBOutlet weak var happinessMeter: UILabel!
     @IBOutlet weak var hungerMeter: UILabel!
-   
     
     
+    // Button action to pat the creature
     @IBAction func patBtn(_ sender: UIButton) {
         if newCreature.hunger < 8 {
             newCreature.happiness += 1
@@ -47,7 +57,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    
+    // Button action to feed the creature
     @IBAction func feedBtn(_ sender: UIButton) {
         if newCreature.hunger < 8 {
             newCreature.hunger += 1
